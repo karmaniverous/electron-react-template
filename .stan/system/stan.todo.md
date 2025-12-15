@@ -16,4 +16,6 @@
 - Migrated ESLint to `eslint.config.ts` with strict, type-aware TypeScript rules.
 - Integrated Prettier and simple-import-sort into ESLint.
 - Explicitly enforce strict type-checked TS rules and requested overrides.
-- Added Vitest config, ESLint vitest rules, sample tests, and Knip config.- Switched renderer to React and replaced toy tests with UI tests.
+- Added Vitest config, ESLint vitest rules, sample tests, and Knip config.
+- Switched renderer to React and replaced toy tests with UI tests.
+- Rewrote README with full feature list and getting started steps.
