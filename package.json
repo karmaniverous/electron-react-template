@@ -1,0 +1,102 @@
+{
+  "author": "Jason Williscroft",
+  "auto-changelog": {
+    "output": "CHANGELOG.md",
+    "unreleased": true,
+    "commitLimit": false,
+    "hideCredit": true
+  },
+  "bugs": {
+    "url": "https://github.com/karmaniverous/electron-react-template/issues"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
+    "electron-squirrel-startup": "^1.0.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "description": "My Electron application description",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.10.2",
+    "@electron-forge/maker-deb": "^7.10.2",
+    "@electron-forge/maker-rpm": "^7.10.2",
+    "@electron-forge/maker-squirrel": "^7.10.2",
+    "@electron-forge/maker-zip": "^7.10.2",
+    "@electron-forge/plugin-vite": "^7.10.2",
+    "@electron-forge/shared-types": "^7.10.2",
+    "@electron/fuses": "^2.0.0",
+    "@eslint/js": "^9.39.2",
+    "@types/electron-squirrel-startup": "^1.0.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/eslint-plugin": "^1.5.2",
+    "auto-changelog": "^2.5.0",
+    "electron": "39.2.7",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^16.5.0",
+    "knip": "^5.73.4",
+    "lefthook": "^2.0.12",
+    "prettier": "^3.7.4",
+    "release-it": "^19.1.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.49.0",
+    "vite": "^7.3.0",
+    "vitest": "^4.0.15"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "homepage": "https://github.com/karmaniverous/electron-react-template#readme",
+  "keywords": [],
+  "license": "BSD-3-Clause",
+  "main": ".vite/build/main.js",
+  "name": "@karmaniverous/electron-react-template",
+  "productName": "electron-react-template",
+  "release-it": {
+    "git": {
+      "changelog": "npx auto-changelog --stdout --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs",
+      "commitMessage": "chore: release v${version}",
+      "requireBranch": "main"
+    },
+    "github": {
+      "release": true
+    },
+    "hooks": {
+      "after:init": [
+        "npm run typecheck",
+        "npm run lint",
+        "npm run package"
+      ],
+      "after:release": [
+        "git switch -c release/${version}",
+        "git push -u origin release/${version}",
+        "git switch ${branchName}"
+      ]
+    },
+    "npm": {
+      "publish": false
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karmaniverous/electron-react-template"
+  },
+  "scripts": {
+    "changelog": "auto-changelog",
+    "knip": "knip",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix .",
+    "make": "electron-forge make",
+    "package": "electron-forge package",
+    "publish": "electron-forge publish",
+    "start": "electron-forge start",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "version": "0.0.0"
+}

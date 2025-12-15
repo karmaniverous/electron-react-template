@@ -1,0 +1,24 @@
+stan-core:
+  stanPath: .stan
+  excludes:
+    - '**/.tsbuild/**'
+    - '**/*.tsbuildinfo'
+    - CHANGELOG.md
+    - package-lock.json
+stan-cli:
+  cliDefaults:
+    run:
+      facets: false
+      plan: false
+      sequential: true
+  patchOpenCommand: code -g {file}
+  scripts:
+    typecheck: npm run typecheck
+    lint:
+      script: npm run lint:fix
+      warnPattern: \\d+:\\d+\\s+warning
+    test: npm run test -- --no-color
+    knip:
+      script: npm run knip
+      warnPattern: Configuration hints
+    package: npm run package

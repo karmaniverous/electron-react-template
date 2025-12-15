@@ -1,0 +1,26 @@
+# stan.project.md
+
+Project-specific assistant guidance for this repo.
+
+- Electron fuses configuration:
+  - Prefer using `@electron/fuses` directly via Electron Forge hooks (see `forge.config.ts`) instead of `@electron-forge/plugin-fuses`.
+  - Rationale: `@electron-forge/plugin-fuses` currently pins `@electron/fuses` to v1 via peerDependencies; this repo wants `@electron/fuses` v2.
+  - Revisit this decision if/when `@electron-forge/plugin-fuses` updates its peerDependencies to support `@electron/fuses@^2`.
+
+- ESLint configuration:
+  - Use ESLint v9 flat config in `eslint.config.ts` with strict, type-aware `typescript-eslint` rules.
+  - Run lint via `tsx ...eslint.js --config eslint.config.ts` so the TS config file can be loaded.
+  - Integrate Prettier and import sorting through ESLint:
+    - `eslint-config-prettier` disables conflicting formatting rules (kept last in config).
+    - `eslint-plugin-prettier` enforces formatting via `prettier/prettier`.
+    - `eslint-plugin-simple-import-sort` enforces deterministic import ordering.
+  - Lint scope:
+    - ESLint should lint all JS/TS files in the repo (including config/tooling files), not just `src/`.
+
+- Testing:
+  - Use Vitest with a repo-root TypeScript config file: `vitest.config.ts`.
+  - ESLint should apply `@vitest/eslint-plugin` recommended rules to test files (`*.test.*` / `*.spec.*`).
+
+- Renderer UI:
+  - The Electron renderer is a React app bootstrapped from `index.html` via `src/renderer.tsx`.
+  - Keep OS/Electron side effects in the main/preload layers; the React renderer should remain UI-focused.
